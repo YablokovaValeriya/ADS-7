@@ -9,13 +9,13 @@ class TPQueue {
     ITEM* next;
   };
 
-public:
+ public:
   TPQueue() :head(nullptr), tail(nullptr) {}
   ~TPQueue();
   void push(const T&);
   T pop();
 
-private:
+ private:
   TPQueue::ITEM* create(const T&);
   ITEM* head;
   ITEM* tail;
@@ -26,7 +26,6 @@ typename TPQueue<T>::ITEM* TPQueue<T>::create(const T& value) {
   ITEM* item = new ITEM;
   item->value = value;
   item->next = nullptr;
-  
   return item;
 }
 
@@ -70,7 +69,7 @@ T TPQueue<T>::pop() {
     T value; value.ch = '0'; value.prior = '0';
     return value;
   }
-};
+}
 
 struct SYM {
   char ch;
