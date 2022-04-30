@@ -65,11 +65,7 @@ T TPQueue<T>::pop() {
     delete head;
     head = temp;
     return value;
-  } else {
-    T value; value.ch = '0'; value.prior = '0';
-    return value;
-  }
-}
+ }
 
 struct SYM {
   char ch;
