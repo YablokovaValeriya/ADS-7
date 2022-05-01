@@ -11,63 +11,57 @@ class TPQueue {
 
  public:
   TPQueue() :head(nullptr), tail(nullptr) {}
-  ~TPQueue();
-  void push(const T&);
-  T pop();
+  ~TPQueue() {
+    while (head)
+      pop();
+  }
 
  private:
-  TPQueue::ITEM* create(const T&);
-  ITEM* head;
-  ITEM* tail;
-};
-
-template<typename T>
-typename TPQueue<T>::ITEM* TPQueue<T>::create(const T& value) {
-  ITEM* item = new ITEM;
-  item->value = value;
-  item->next = nullptr;
-  return item;
-}
-
-template<typename T>
-TPQueue<T>::~TPQueue() {
-  while (head)
-    pop();
-}
-
-template<typename T>
-void TPQueue<T>::push(const T& value) {
-  if (tail && head) {
-    ITEM* tmp = head;
-    ITEM* newItem = create(value);
-    if ((head->value).prior < value.prior) {
-      newItem->next = head;
-      head = newItem;
-    } else {
-      while (tmp->next != nullptr && (tmp->next->value.prior < value.prior)) {
-        tmp = tmp->next;
-      }
-      newItem->next = tmp->next;
-      tmp->next = newItem;
-    }
-  } else {
-    head = create(value);
-    head->next = tail;
-    tail = head;
+  ITEM *head;
+  ITEM *tail;
+  ITEM *create(T value) {
+    ITEM *t = new ITEM;
+    t->value = value;
+    t->next = nullptr;
+    return t;
   }
-}
-
-template<typename T>
-T TPQueue<T>::pop() {
-  if (head) {
-    ITEM* temp = head->next;
+  
+  void push(const T &value) {
+    if (tail && head) {
+      ITEM *temp = head;
+      if (temp->value.prior < value.prior) {
+        temp = create(value);
+        temp->next = head;
+        head = temp;
+      } else {
+        while (temp->next) {
+          if (temp->next->value.prior < value.prior) {
+            ITEM *t = create(value);
+            t->next = temp->next;
+            temp->next = t;
+            break;
+          } else {
+            temp = temp->next;
+          }
+        }
+      }
+      if (!temp->next) {
+        tail->next = create(value);
+        tail = tail->next;
+      }
+    } else {
+      head = create(value);
+      tail = head;
+    }
+  }
+  T pop() {
+    ITEM *temp = head->next;
     T value = head->value;
     delete head;
     head = temp;
     return value;
   }
-  return head->value;
-}
+};
 
 struct SYM {
   char ch;
