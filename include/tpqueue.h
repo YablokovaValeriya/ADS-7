@@ -58,13 +58,14 @@ void TPQueue<T>::push(const T& value) {
 }
 
 template<typename T>
-TPQueue<T>::pop() {
+T TPQueue<T>::pop() {
   if (head) {
     ITEM* temp = head->next;
     T value = head->value;
     delete head;
     head = temp;
     return value;
+  }
 }
 
 struct SYM {
