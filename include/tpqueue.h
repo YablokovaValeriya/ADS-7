@@ -9,13 +9,6 @@ class TPQueue {
     ITEM* next;
   };
 
- public:
-  TPQueue() :head(nullptr), tail(nullptr) {}
-  ~TPQueue() {
-    while (head)
-      pop();
-  }
-
  private:
   ITEM *head;
   ITEM *tail;
@@ -24,6 +17,13 @@ class TPQueue {
     t->value = value;
     t->next = nullptr;
     return t;
+  }
+  
+   public:
+  TPQueue() :head(nullptr), tail(nullptr) {}
+  ~TPQueue() {
+    while (head)
+      pop();
   }
   
   void push(const T &value) {
