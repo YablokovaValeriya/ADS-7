@@ -58,7 +58,7 @@ void TPQueue<T>::push(const T& value) {
 }
 
 template<typename T>
-T TPQueue<T>::pop() {
+TPQueue<T>::pop() {
   if (head) {
     ITEM* temp = head->next;
     T value = head->value;
