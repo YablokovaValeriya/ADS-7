@@ -18,14 +18,14 @@ class TPQueue {
     t->next = nullptr;
     return t;
   }
-  
-   public:
+
+ public:
   TPQueue() :head(nullptr), tail(nullptr) {}
   ~TPQueue() {
     while (head)
       pop();
   }
-  
+
   void push(const T &value) {
     if (tail && head) {
       ITEM *temp = head;
